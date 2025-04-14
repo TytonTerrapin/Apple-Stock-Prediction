@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="prediction-section">
+        <h2>Close Price Prediction</h2>
+        <form method="POST">
+            <input type="number" name="open" placeholder="Open" step="any" required>
+            <input type="number" name="high" placeholder="High" step="any" required>
+            <input type="number" name="low" placeholder="Low" step="any" required>
+            <button type="submit" name="predict_regressor">Predict Close Price</button>
+        </form>
+        {% if close_price is not none %}
+            <div class="result">
+                <p>Predicted Close Price: {{ close_price }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="prediction-section">
+        <h2>Next Day Values Prediction</h2>
+        <form method="POST">
+            <input type="number" name="open" placeholder="Open" step="any" required>
+            <input type="number" name="high" placeholder="High" step="any" required>
+            <input type="number" name="low" placeholder="Low" step="any" required>
+            <input type="number" name="close" placeholder="Close" step="any" required>
+            <input type="number" name="adj_close" placeholder="Adj Close" step="any" required>
+            <button type="submit" name="predict_regressor2">Predict Next Day Values</button>
+        </form>
+        {% if next_day_values is not none %}
+            <div class="result">
+                <p>Predicted Next Day Values:</p>
+                <ul>
+                    <li>Open: {{ next_day_values[0] }}</li>
+                    <li>High: {{ next_day_values[1] }}</li>
+                    <li>Low: {{ next_day_values[2] }}</li>
+                    <li>Close: {{ next_day_values[3] }}</li>
+                    <li>Adj Close: {{ next_day_values[4] }}</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="prediction-section">
+        <h2>Market Status Classifier</h2>
+        <form method="POST">
+            <input type="number" name="open" placeholder="Open" step="any" required>
+            <input type="number" name="high" placeholder="High" step="any" required>
+            <input type="number" name="low" placeholder="Low" step="any" required>
+            <button type="submit" name="predict_classifier">Predict Market Status</button>
+        </form>
+        {% if market_status %}
+            <div class="result">
+                <p>Market Status: {{ market_status }}</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
